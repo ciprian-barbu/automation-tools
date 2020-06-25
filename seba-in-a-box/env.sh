@@ -72,3 +72,8 @@ touch "${M}/kubeadm"
 helm repo add incubator https://iecedge.github.io/helm-k8s-charts/incubator/
 helm repo add stable https://iecedge.github.io/helm-k8s-charts/stable/
 touch "${M}/helm-init"
+
+if [ -z "$(kubectl get psp -o name 2>/dev/null)" ]
+then
+   kubectl apply -f seba-policy.yaml
+fi
